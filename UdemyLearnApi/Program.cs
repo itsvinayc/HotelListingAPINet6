@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
 using Serilog;
+using UdemyLearnApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var connetionString = builder.Configuration.GetConnectionString("HotelListingDbConnectionString");
+builder.Services.AddDbContext<HotelListingDbContext>(options =>
+{
+    options.UseSqlServer(connetionString);
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
